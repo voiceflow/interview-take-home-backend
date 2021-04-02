@@ -1,3 +1,4 @@
+
 # Voiceflow Interview API Project 💬
 
 Welcome to Voiceflow's API Project!
@@ -13,13 +14,13 @@ Make sure you have [Node.js](https://nodejs.org/) and [yarn](https://yarnpkg.com
 
 Fork this repository.
 
-| to install all dependencies (node_modules) :
+> to install all dependencies (node_modules) :
 
 ```
 yarn install
 ```
 
-| to start the server on http://localhost:4000 :
+> to start the server on http://localhost:4000 :
 
 ```
 yarn start
@@ -34,29 +35,29 @@ Go on http://localhost:4000, you should see a chat window like this:
 If you try typing something, it will always respond back with "hello world!" and "goodbye". This is because the backend hasn't been fully implemented.
 
 # Overview ℹ️
-Login/sign up for [Voiceflow Creator](https://creator.voiceflow.com), and build a simple `Custom Assistant` project. If you need inspiration you can check out the [Templates Workspace](https://creator.voiceflow.com/workspace/D8nag5Vko2).
+Login/sign up for [Voiceflow Creator](https://creator.voiceflow.com), and build a simple **Custom Assistant** project. If you need inspiration you can check out the [Templates Workspace](https://creator.voiceflow.com/workspace/D8nag5Vko2).
 
 In your `app.ts` we can see that there is a `app.post('/message', (req, res) => ...)` Express endpoint. This is what needs to be completed.
 
 Read the Voiceflow Dialog Management **Stateless API** documentation:
-> ⚠️  make sure to use the **Stateless API** - *do not use the State API*
 
 https://raw.githack.com/voiceflow/general-runtime/master/backend/docs/index.html
 
+> ⚠️  make sure to use the **Stateless API** - *do not use the State API*
+
 Use the Voiceflow API to hook up your Voiceflow Project to the `POST /message` endpoint.
 
-Whenever you send something on the frontend you will notice that it logs the `req.body` - containing a `message` and `userID`. The `userID` is unique per tab. If you open a new tab on http://localhost:4000 you will get a different userID.
+Whenever you send something on the frontend you will notice that it logs the `req.body` - containing a `message: string` and `userID: string`. The `userID` is unique per tab. If you open a new tab to http://localhost:4000 you will get a different `userID`. This emulates different people from all over the world using this chat service.
 
 **Ensure that distinct users have distinct conversations**
-
 
 
 ## Alternative Option 👑
 Here we are using an HTML/CSS/Jquery frontend to display the conversation. Instead you can pick any conversational platform where people can converse back and forth with a bot, such as - [discord](https://www.smashingmagazine.com/2021/02/building-discord-bot-discordjs/), [slack](https://github.com/slackapi/bolt-js), [messenger](https://www.hebergementwebs.com/programming/how-to-create-a-facebook-bot-app-using-node-js), etc.
 
-You can this platform as your frontend instead, and set up your backend to interface your Voiceflow project with this platform. Ensure that this platform has an API or SDK that allows a Node.js server to receive a webhook request, and reply back. 
+You can use this platform as your frontend instead, and set up your backend to interface your Voiceflow project with this platform. Ensure that this platform has an API or SDK that allows a Node.js server to receive a webhook request, and reply back. 
 
-If you choose this route, there's no need to fork this repo, you can start off a template repo for the platform.
+If you choose this option, there's no need to fork this repo, you can start off with a template repo for the platform you picked.
 
 There is usually some additional setup involved with these platforms. If you are looking for something easy and quick to set up, try [telegram](https://core.telegram.org/bots) *(you need to install the app and message the "Botfather")*
 
