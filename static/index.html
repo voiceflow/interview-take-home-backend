@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="./style.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <div class="wrapper py-5">
+    <div class="rounded-lg overflow-hidden shadow">
+      <!-- Chat Box-->
+      <div>
+        <div class="px-4 py-5 chat-box bg-white" id="chat">
+        </div>
+
+        <!-- Typing area -->
+        <form id="message" class="bg-light">
+          <div class="input-group">
+            <input type="text" placeholder="Type a message" id="message-input"
+              class="form-control rounded-0 border-0 py-4 bg-light">
+            <div class="input-group-append">
+              <button type="submit" class="btn btn-link"> <i class="fa fa-paper-plane"></i></button>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+  <script src="./main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+body {
+  background-color: #74ebd5;
+  background-image: linear-gradient(90deg, #74ebd5 0%, #9face6 100%);
+
+  min-height: 100vh;
+}
+.wrapper {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.text-small {
+  font-size: 0.9rem;
+}
+
+.chat-box {
+  height: 600px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+input::placeholder {
+  font-size: 0.9rem;
+  color: #999;
+}
