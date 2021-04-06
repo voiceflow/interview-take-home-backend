@@ -41,7 +41,7 @@ In your `app.ts` we can see that there is a `app.post('/message', (req, res) => 
 
 Read the Voiceflow Dialog Management **Stateless API** documentation:
 
-https://raw.githack.com/voiceflow/general-runtime/master/backend/docs/index.html
+https://cdn.statically.io/gh/voiceflow/general-runtime/master/backend/docs/index.html
 
 > ⚠️  make sure to use the **Stateless API** - *do not use the State API*
 
