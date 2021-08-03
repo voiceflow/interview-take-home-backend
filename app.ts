@@ -1,10 +1,31 @@
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
-import express from 'express';
+import express, { Request, Response } from 'express';
 import path from 'path';
+import { getUserState, setUserState } from './lib/state';
+import { vfMessage } from './lib/voiceflow';
 
 // load in environment variables from .env file
 dotenv.config();
+
+const postMessage = async (req: Request, res: Response): Promise<Response> => {
+  const { userID, message } = req.body;
+
+  if (!userID || !message) {
+    // Don't send any response messages if request is invalid
+    return res.send([]);
+  }
+
+  const state = getUserState(userID);
+
+  const vfRes = await vfMessage(message, state);
+
+  setUserState(userID, vfRes.state);
+
+  const resMessages = [JSON.stringify(vfRes)];
+
+  return res.send(resMessages);
+};
 
 // Create Express server
 const app = express();
@@ -22,12 +43,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
  */
 app.get('/', (_, res) => res.sendFile(path.join(`${__dirname}/index.html`)));
 
-app.post('/message', (req, res) => {
-  console.log(req.body);
-
-  // TODO: implement route
-
-  res.send(['hello world!', 'goodbye']);
-});
+app.post('/message', postMessage);
 
 export default app;
