@@ -2,29 +2,44 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import express, { Request, Response } from 'express';
 import path from 'path';
-import { getUserState, setUserState } from './lib/state';
-import { vfMessage } from './lib/voiceflow';
 
-// load in environment variables from .env file
+import { getUserState, setUserState } from './lib/state';
+import { parseTrace, vfLaunch, vfMessage } from './lib/voiceflow';
+
 dotenv.config();
+
+const ERROR_RESULT = 'Something went wrong';
 
 const postMessage = async (req: Request, res: Response): Promise<Response> => {
   const { userID, message } = req.body;
 
   if (!userID || !message) {
-    // Don't send any response messages if request is invalid
-    return res.send([]);
+    return res.send([ERROR_RESULT]);
   }
 
-  const state = getUserState(userID);
+  const result = [];
+
+  let state = getUserState(userID);
+
+  if (!state) {
+    const launchRes = await vfLaunch();
+    if (launchRes?.trace) {
+      result.push(...parseTrace(launchRes.trace));
+    }
+    state = launchRes?.state;
+  }
 
   const vfRes = await vfMessage(message, state);
 
+  if (!vfRes) {
+    return res.send([...result, ERROR_RESULT]);
+  }
+
   setUserState(userID, vfRes.state);
 
-  const resMessages = [JSON.stringify(vfRes)];
+  result.push(...parseTrace(vfRes.trace));
 
-  return res.send(resMessages);
+  return res.send(result);
 };
 
 // Create Express server
