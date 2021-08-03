@@ -8,6 +8,8 @@ import { parseTrace, vfLaunch, vfMessage } from './lib/voiceflow';
 
 dotenv.config();
 
+const WELCOME_RESULT =
+  'Welcome to Peter\'s Pizza. What would you like on your pizza? List ingredients one by one and say "done" to confirm your order.';
 const ERROR_RESULT = 'Something went wrong';
 
 const postMessage = async (req: Request, res: Response): Promise<Response> => {
@@ -25,6 +27,10 @@ const postMessage = async (req: Request, res: Response): Promise<Response> => {
     const launchRes = await vfLaunch();
     if (launchRes?.trace) {
       result.push(...parseTrace(launchRes.trace));
+    }
+    // The very first launch doesn't seem to work, so using this as a workaround
+    if (!result.length) {
+      result.push(WELCOME_RESULT);
     }
     state = launchRes?.state;
   }
