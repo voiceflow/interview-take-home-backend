@@ -12,7 +12,7 @@ It’ll help you gain a much better understanding of how conversational interfac
 ## Setup 📦
 Make sure you have [Node.js](https://nodejs.org/) and [yarn](https://yarnpkg.com/) on your computer.
 
-Fork this repository.
+Clone this repository (keep your repo private).
 
 > to install all dependencies (node_modules) :
 
@@ -35,7 +35,11 @@ Go on http://localhost:4000, you should see a chat window like this:
 If you try typing something, it will always respond back with "hello world!" and "goodbye". This is because the backend hasn't been fully implemented.
 
 # Overview ℹ️
-Login/sign up for [Voiceflow Creator](https://creator.voiceflow.com), and build a simple **Custom Assistant** project. If you need inspiration you can check out the [Templates Workspace](https://creator.voiceflow.com/workspace/D8nag5Vko2).
+Login/sign up for [Voiceflow Creator](https://creator.voiceflow.com), and build a simple **Custom Assistant** project. If you need inspiration you can check out [Project Templates](https://www.voiceflow.com/templates). Test it out on Voiceflow to make sure it's working!
+
+On the **"Launch"** tab of your Voiceflow project, you'll be able to get the API key. [Click here](https://www.voiceflow.com/api/dialog-manager) for documentation on the Voiceflow API.
+
+![Screen Shot 2022-03-01 at 1 58 51 PM](https://user-images.githubusercontent.com/5643574/156231631-410e07f7-3afc-410f-99b8-5476e694a5a4.png)
 
 In your `app.ts` we can see that there is a `app.post('/message', (req, res) => ...)` Express endpoint. This is what needs to be completed.
 
@@ -49,6 +53,7 @@ Use the Voiceflow API to hook up your Voiceflow Project to the `POST /message` e
 
 Whenever you send something on the frontend you will notice that it logs the `req.body` - containing a `message: string` and `userID: string`. The `userID` is unique per tab. If you open a new tab to http://localhost:4000 you will get a different `userID`. This emulates different people from all over the world using this chat service.
 
+The goal of this exercise is the manage user states:
 **Ensure that distinct users have distinct conversations**
 
 
@@ -68,13 +73,14 @@ These platforms will always send a unique userID/sessionID per request.
 > there's no brownie points for doing this alternative option instead of the standard. It is useful if you've created a bot with the platform before - and it's also more practical than a mock html chat.
 
 # Tips 📝
-Unless you get fancy and go off the rails (which isn't a bad thing 👍) this project takes around ~1-2 hours if you are familiar with the stack. Keep in mind this isn't a race to get it done - it's about getting it done well.
+Unless you get fancy and go off the rails (which isn't a bad thing 👍) this project takes around ~2-3 hours if you are familiar with the stack. Keep in mind this isn't a race to get it done - it's about getting it done well.
 * use Typescript proficiently
 * use repeatable, scalable patterns
 * make your backend structure go beyond just `app.ts`
 * account for edge cases
 * manage sensitive data securely
 * manage different user session states well
+* implement some level of tests
 
 # Submission
 Send the link to your working repository to your recruiter's email.
